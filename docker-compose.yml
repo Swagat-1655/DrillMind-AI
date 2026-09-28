@@ -1,0 +1,31 @@
+# DrillMind AI — one-command deploy.
+#
+#   docker compose up --build
+#   open http://localhost:8000
+#
+# The UI and the API are served from one origin, so no proxy and no CORS setup
+# is required. Secrets are read from backend/.env (gitignored) — do NOT list
+# them under `environment`, because that would override the file with an empty
+# shell value. To point the container at a different key or model, edit
+# backend/.env or run `docker compose run -e GROQ_MODEL=... drillmind`.
+
+services:
+  drillmind:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: drillmind-ai:latest
+    ports:
+      # Host port is configurable; the container always listens on 8000.
+      - "${HOST_PORT:-8000}:8000"
+    # `required: false` needs Docker Compose v2.24+. On an older compose, drop
+    # the `required` line (and create backend/.env, or compose will refuse to
+    # start). Leaving GROQ_API_KEY unset runs the copilot on the local
+    # analytical engine instead of Groq.
+    env_file:
+      - path: backend/.env
+        required: false
+    environment:
+      DRILLMIND_FRONTEND_DIST: /app/frontend/dist
+      DRILLMIND_SERVE_SPA: "1"
+    restart: unless-stopped

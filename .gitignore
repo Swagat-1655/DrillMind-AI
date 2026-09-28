@@ -1,0 +1,36 @@
+# dependencies
+node_modules/
+frontend/node_modules/
+.pnpm-store/
+
+# builds
+dist/
+frontend/dist/
+build/
+*.tsbuildinfo
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# secrets — never commit these
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.local
+
+# generated artefacts
+generated_reports/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# local agent/tooling state
+.freebuff/

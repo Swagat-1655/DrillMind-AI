@@ -1,0 +1,37 @@
+# Render Blueprint — one Docker web service serving both the SPA and the API.
+#
+#   Render Dashboard -> New + -> Blueprint -> pick this repository
+#
+# The Dockerfile builds the frontend with Node and runs FastAPI, which serves
+# `frontend/dist` on the same origin as `/api`. One service, one port, no
+# reverse proxy and no CORS — Render's `PORT` is honoured by the image CMD.
+#
+# Anything with `sync: false` must be typed into the dashboard; it is never
+# read from the repository.
+
+services:
+  - type: web
+    name: drillmind-ai
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      # Secret: set this in the dashboard (Environment -> Add Environment Variable).
+      # Leave it unset and the copilot falls back to the local analytical engine.
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_MODEL
+        value: openai/gpt-oss-120b
+      - key: GROQ_BASE_URL
+        value: https://api.groq.com/openai/v1
+      # Where the SPA build lands inside the image.
+      - key: DRILLMIND_FRONTEND_DIST
+        value: /app/frontend/dist
+      - key: DRILLMIND_SERVE_SPA
+        value: "1"
+      - key: PYTHONUNBUFFERED
+        value: "1"

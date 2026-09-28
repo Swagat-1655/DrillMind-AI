@@ -1,0 +1,32 @@
+# Keep the build context small and never ship secrets or host artefacts.
+
+# secrets
+.env
+.env.*
+backend/.env
+backend/.env.*
+!.env.example
+!backend/.env.example
+
+# dependencies and build output (rebuilt inside the image)
+node_modules
+**/node_modules
+frontend/dist
+backend/.venv
+.venv
+venv
+__pycache__
+**/__pycache__
+*.py[cod]
+*.tsbuildinfo
+
+# repo noise
+.git
+.gitignore
+.freebuff
+*.log
+frontend/vite.log
+backend/supervisor.log
+backend/generated_reports
+.DS_Store
+Thumbs.db
