@@ -6,6 +6,8 @@
 
 **AI-powered offset-well intelligence and decision support for smarter, safer drilling.**
 
+<sub>Built by <b>Neon Nexus Z</b></sub>
+
 <br/>
 
 ![Smart India Hackathon](https://img.shields.io/badge/Smart%20India%20Hackathon-2026-FF9933?style=for-the-badge&labelColor=0B1220)
@@ -513,6 +515,8 @@ Upload `frontend/dist` to Netlify, Vercel or S3 and point a reverse proxy at uvi
 
 <div align="center">
 
-<sub>Generated with the DrillMind AI engineering agent · Smart India Hackathon 2026</sub>
+### ⚡ Built by **Neon Nexus Z**
+
+<sub>Smart India Hackathon 2026 · Problem Statement `eRTMAC-NWIS`</sub>
 
 </div>
